@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="Restart Service to Apply Settings">
+        <setting id="file_location" type="file" label="File Location" default="None_Selected"/>
+        <setting id="auto_close" type="bool" label="Auto-close keyboard" default="false"/>
+        <setting id="test_vkb" type="text" label="test the service here" default=""/>
+    </category>
+</settings>

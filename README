@@ -1,0 +1,3 @@
+Push Strings auto-populates the XBMC virtual keyboard with the first line in a text file you specify.
+
+Its somewhat limited just now, but I may add a pop up window when keyboard is active that allows you to select more then the first line.
