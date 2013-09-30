@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="service.pushstrings"
        name="Push Strings"
-       version="0.0.1"
+       version="0.0.2"
        provider-name="KodeKarnage">
     <requires>
         <import addon="xbmc.python" version="2.1.0"/>
@@ -14,7 +14,7 @@
         <language>en</language>
         <platform>all</platform>
         <summary>Push Strings</summary>
-        <description>Loads single lines of text from a predetermined text file to populate input fields in XBMC. I control XBMC by remote and I am sick of using the in-built, on-screen keyboard to type in long text strings. I want this service to recognise when a text input field is selected and loads a select screen populated with a bunch of common strings I use.</description>
+        <description>Loads single lines of text from a predetermined text file to populate virtual keyboard in XBMC. I control XBMC by remote and I am sick of using the in-built, on-screen keyboard to type in long text strings. This service recognises when the virtual keyboard is open and reads in a line from a text file you select. If there are multiple lines in the text file, you can have the service cycle through them at a speed you determine.</description>
         <license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</license>
     </extension>
 </addon>

@@ -3,6 +3,8 @@
     <category label="Restart Service to Apply Settings">
         <setting id="file_location" type="file" label="File Location" default="None_Selected"/>
         <setting id="auto_close" type="bool" label="Auto-close keyboard" default="false"/>
+        <setting id="cycle" type="bool" label="Cycle through lines in file" enable="eq(-1,false)" default="false"/>
+        <setting id="cycle_time" type="slider" label="Cycle time" default="2" range="1,1,5" enable="eq(-1,true) + eq(-2,false)" option="int"/>
         <setting id="test_vkb" type="text" label="test the service here" default=""/>
     </category>
 </settings>

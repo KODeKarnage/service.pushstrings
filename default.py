@@ -29,6 +29,8 @@ _addon_ = xbmcaddon.Addon("service.pushstrings")
 _setting_ = _addon_.getSetting
 file_location = _setting_('file_location')
 auto_close = _setting_('auto_close')
+cycle = _setting_('cycle')
+cycle_time = int(float(_setting_('cycle_time')))
 
 #import sys
 #sys.stdout = open('C:\\Temp\\test.txt', 'w')
@@ -49,27 +51,36 @@ class keyboard_monitor:
 	def __init__(self):
 		self._daemon()
 
-	def push_string(self, count):
+	def push_string(self, count, line_num):
 		#select_window = kbm_window("DialogSelect.xml", scriptPath, 'Default')
 		#select_window.doModal()
 		#del select_window
+		
 		if self.count == 0:
 			self.string1 = self.process_file()
-			if self.string1 != "":
+			if self.string1:
+				max_str = len(self.string1)
 				if auto_close == "true":
 					self.ac = True
 				else:
 					self.ac = False
-				self.req = json.dumps({"id": "0", "jsonrpc":"2.0", "method":"Input.SendText", "params":{"text":self.string1, "done":self.ac}})
+
+				if cycle == 'false':
+					self.count=+1
+
+				self.req = json.dumps({"id": "0", "jsonrpc":"2.0", "method":"Input.SendText", "params":{"text":self.string1[self.line_num], "done":self.ac}})
 				xbmc.executeJSONRPC(self.req)
-				self.count=+1
+
+				if cycle == 'true':
+					xbmc.sleep(cycle_time*1000)
+					self.line_num = (self.line_num + 1) % max_str		
 
 	def process_file(self):
 		if file_location != "None_Selected":
 			with open(file_location,'r') as f:
-				output = f.readline()	
+				output = f.readlines()	
 		else:
-			output = ""		
+			output = []	
 		return output
 
 	def _daemon(self):
@@ -77,14 +88,12 @@ class keyboard_monitor:
 		while (not xbmc.abortRequested):
 			xbmc.sleep(500)
 			self.count = 0
+			self.line_num = 0
 			while xbmc.getCondVisibility('Window.IsActive(virtualkeyboard)'):
-				self.push_string(self.count)
-
-	
-
+				self.push_string(self.count, self.line_num)
 
 if (__name__ == "__main__"):
-	temp = keyboard_monitor()
+	kbm = keyboard_monitor()
 
 
 
